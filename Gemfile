@@ -27,6 +27,12 @@ end
 # the mongo rubygem:
 gem 'mongo'
 
+#$:.unshift File.expand_path("vendor/common/lib", __dir__)
+#$:.unshift File.expand_path("vendor/controller/lib", __dir__)
+#$:.unshift File.expand_path('vendor/broker_plugins/mongo/lib', __dir__)
+#$:.unshift File.expand_path('vendor/broker_plugins/msg-broker/mcollective/lib', __dir__)
+#require 'openshift-origin-common'
+
 gem 'openshift-origin-common', :path => 'vendor/common'
 gem 'openshift-origin-controller', :path => 'vendor/controller'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
