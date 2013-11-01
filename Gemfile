@@ -45,7 +45,7 @@ gem 'openshift-origin-controller'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 gem 'openshift-origin-auth-mongo'
-gem 'openshift-origin-msg-broker-mcollective'
+#gem 'openshift-origin-msg-broker-mcollective'
 
 gem 'thin'
 

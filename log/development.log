@@ -659,3 +659,19 @@ Development configuration for openshift-origin-msg-broker-mcollective not found.
 Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
 Development configuration for openshift-origin-msg-broker-mcollective not found. Using production configuration.
 [0;37m2013-11-01 23:43:30.595[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:5252)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+[0;37m2013-11-02 00:15:41.641[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:18907)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+[0;37m2013-11-02 00:15:53.505[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:18943)
+[0;37m2013-11-02 00:15:58.761[0m [[32mINFO [0m]  (pid:18943)
+[0;37m2013-11-02 00:15:58.762[0m [[32mINFO [0m]  (pid:18943)
+[0;37m2013-11-02 00:15:58.763[0m [[32mINFO [0m] Started GET "/broker/rest/api" for 127.0.0.1 at 2013-11-02 00:15:58 +0800 (pid:18943)
+[0;37m2013-11-02 00:15:58.933[0m [[32mINFO [0m] Processing by ApiController#show as */* (pid:18943)
+[0;37m2013-11-02 00:15:58.935[0m [[0;37mDEBUG[0m] API version 1.6 (pid:18943)
+[0;37m2013-11-02 00:15:58.964[0m [[32mINFO [0m] Completed 200 OK in 30ms (Views: 5.8ms) (pid:18943)
+[0;37m2013-11-02 00:16:01.554[0m [[32mINFO [0m]  (pid:18943)
+[0;37m2013-11-02 00:16:01.554[0m [[32mINFO [0m]  (pid:18943)
+[0;37m2013-11-02 00:16:01.554[0m [[32mINFO [0m] Started GET "/broker/rest/api" for 127.0.0.1 at 2013-11-02 00:16:01 +0800 (pid:18943)
+[0;37m2013-11-02 00:16:01.558[0m [[32mINFO [0m] Processing by ApiController#show as */* (pid:18943)
+[0;37m2013-11-02 00:16:01.559[0m [[0;37mDEBUG[0m] API version 1.6 (pid:18943)
+[0;37m2013-11-02 00:16:01.582[0m [[32mINFO [0m] Completed 200 OK in 23ms (Views: 9.1ms) (pid:18943)
