@@ -45,11 +45,12 @@ gem 'openshift-origin-controller'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 gem 'openshift-origin-auth-mongo'
-#gem 'openshift-origin-msg-broker-mcollective'
 
 gem 'thin'
 
-group :development, :test do
+# These gems are missing on heroku
+
+#group :development, :test do
   # The require part from http://tinyurl.com/3pf68ho
   gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
   gem 'mocha', '~> 0.13.1', :require => false
@@ -59,4 +60,4 @@ group :development, :test do
   gem 'minitest'
   gem 'capybara', '~> 2.1.0', :require => false
   gem 'poltergeist',   '~> 1.2.0', :require => false
-end
+#end

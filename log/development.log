@@ -675,3 +675,7 @@ Development configuration for openshift-origin-auth-mongo not found. Using produ
 [0;37m2013-11-02 00:16:01.558[0m [[32mINFO [0m] Processing by ApiController#show as */* (pid:18943)
 [0;37m2013-11-02 00:16:01.559[0m [[0;37mDEBUG[0m] API version 1.6 (pid:18943)
 [0;37m2013-11-02 00:16:01.582[0m [[32mINFO [0m] Completed 200 OK in 23ms (Views: 9.1ms) (pid:18943)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+[0;37m2013-11-02 00:34:01.630[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:26955)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+[0;37m2013-11-02 00:34:56.458[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:27412)
