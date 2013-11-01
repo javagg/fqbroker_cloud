@@ -656,3 +656,6 @@ Development configuration for openshift-origin-msg-broker-mcollective not found.
 [0;37m2013-11-01 21:44:21.162[0m [[32mINFO [0m] Processing by ApiController#show as */* (pid:14139)
 [0;37m2013-11-01 21:44:21.163[0m [[0;37mDEBUG[0m] API version 1.6 (pid:14139)
 [0;37m2013-11-01 21:44:21.190[0m [[32mINFO [0m] Completed 200 OK in 28ms (Views: 5.7ms) (pid:14139)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+Development configuration for openshift-origin-msg-broker-mcollective not found. Using production configuration.
+[0;37m2013-11-01 23:43:30.595[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:5252)

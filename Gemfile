@@ -33,12 +33,19 @@ gem 'mongo'
 #$:.unshift File.expand_path('vendor/broker_plugins/msg-broker/mcollective/lib', __dir__)
 #require 'openshift-origin-common'
 
-gem 'openshift-origin-common', :path => 'vendor/common'
-gem 'openshift-origin-controller', :path => 'vendor/controller'
+#gem 'openshift-origin-common', :path => 'vendor/common'
+#gem 'openshift-origin-controller', :path => 'vendor/controller'
+#gem 'netrc' # rest-client has an undeclared prereq on netrc
+#
+#gem 'openshift-origin-auth-mongo', :path => 'vendor/broker_plugins/mongo'
+#gem 'openshift-origin-msg-broker-mcollective', :path => 'vendor/broker_plugins/msg-broker/mcollective'
+
+gem 'openshift-origin-common'
+gem 'openshift-origin-controller'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
-gem 'openshift-origin-auth-mongo', :path => 'vendor/broker_plugins/mongo'
-gem 'openshift-origin-msg-broker-mcollective', :path => 'vendor/broker_plugins/msg-broker/mcollective'
+gem 'openshift-origin-auth-mongo'
+gem 'openshift-origin-msg-broker-mcollective'
 
 gem 'thin'
 
