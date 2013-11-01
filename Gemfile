@@ -1,28 +1,49 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
-#gem 'mysql2'
-#gem 'pg'
-gem 'thin'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3'
-
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.2'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
+gem 'rails', '~> 3.2.8'
+gem 'json'
+gem 'json_pure'
+gem 'parseconfig', '~> 1.0.2'
+gem 'xml-simple'
+gem 'rack'
+gem 'regin'
+gem 'open4'
+gem 'systemu'
+gem 'mongoid'
+gem 'bson'
+gem 'bson_ext'
+gem 'pry', :require => 'pry' if ENV['PRY']
+# Fedora 19 splits psych out into its own gem.
+if Gem::Specification.respond_to?(:find_all_by_name) and not Gem::Specification::find_all_by_name('psych').empty?
+  gem 'psych'
 end
 
-gem 'jquery-rails', '~> 2.0.2'
+# For performance reasons, the following scripts will not be
+# refactored to use mongoid exclusively:
+#  * broker-util/oo-admin-chk
+#  * broker-util/oo-admin-fix-sshkeys
+#  * broker-util/oo-stats
+# These scripts use the OpenShift::DataStore API, and thus depend on
+# the mongo rubygem:
+gem 'mongo'
 
-ruby '2.0.0'
+gem 'openshift-origin-common', :path => 'vendor/common'
+gem 'openshift-origin-controller', :path => 'vendor/controller'
+gem 'netrc' # rest-client has an undeclared prereq on netrc
+
+gem 'openshift-origin-auth-mongo', :path => 'vendor/broker_plugins/mongo'
+gem 'openshift-origin-msg-broker-mcollective', :path => 'vendor/broker_plugins/msg-broker/mcollective'
+
+gem 'thin'
+
+group :development, :test do
+  # The require part from http://tinyurl.com/3pf68ho
+  gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
+  gem 'mocha', '~> 0.13.1', :require => false
+  gem 'rake', '>= 0.8.7'
+  gem 'simplecov'
+  gem 'cucumber'
+  gem 'minitest'
+  gem 'capybara', '~> 2.1.0', :require => false
+  gem 'poltergeist',   '~> 1.2.0', :require => false
+end

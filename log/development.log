@@ -1,23 +1,12 @@
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-
-
-Started GET "/assets/rails.png" for 127.0.0.1 at 2013-11-01 17:07:19 +0800
-Served asset /rails.png - 200 OK (16ms)
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-Connecting to database specified by database.yml
-
-
-Started GET "/rails/info/properties" for 127.0.0.1 at 2013-11-01 18:26:39 +0800
-Processing by Rails::InfoController#properties as HTML
-  Rendered inline template (1.3ms)
-Completed 200 OK in 7ms (Views: 6.4ms)
-
-
-Started GET "/assets/rails.png" for 127.0.0.1 at 2013-11-01 18:26:44 +0800
-Served asset /rails.png - 304 Not Modified (18ms)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+Development configuration for openshift-origin-msg-broker-mcollective not found. Using production configuration.
+[0;37m2013-11-01 19:44:20.988[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:24406)
+Development configuration for openshift-origin-auth-mongo not found. Using production configuration.
+Development configuration for openshift-origin-msg-broker-mcollective not found. Using production configuration.
+[0;37m2013-11-01 19:44:48.696[0m [[31mERROR[0m] WARNING: Please configure SESSION_SECRET in conf/broker-dev.conf.  Run oo-accept-broker for details. (pid:24607)
+[0;37m2013-11-01 19:45:28.708[0m [[32mINFO [0m]  (pid:24607)
+[0;37m2013-11-01 19:45:28.708[0m [[32mINFO [0m]  (pid:24607)
+[0;37m2013-11-01 19:45:28.708[0m [[32mINFO [0m] Started GET "/broker/rest/api" for 127.0.0.1 at 2013-11-01 19:45:28 +0800 (pid:24607)
+[0;37m2013-11-01 19:45:28.868[0m [[32mINFO [0m] Processing by ApiController#show as */* (pid:24607)
+[0;37m2013-11-01 19:45:28.869[0m [[0;37mDEBUG[0m] API version 1.6 (pid:24607)
+[0;37m2013-11-01 19:45:28.963[0m [[32mINFO [0m] Completed 200 OK in 94ms (Views: 5.8ms) (pid:24607)
