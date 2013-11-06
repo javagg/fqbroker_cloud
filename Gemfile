@@ -27,30 +27,23 @@ end
 # the mongo rubygem:
 gem 'mongo'
 
-#$:.unshift File.expand_path("vendor/common/lib", __dir__)
-#$:.unshift File.expand_path("vendor/controller/lib", __dir__)
-#$:.unshift File.expand_path('vendor/broker_plugins/mongo/lib', __dir__)
-#$:.unshift File.expand_path('vendor/broker_plugins/msg-broker/mcollective/lib', __dir__)
-#require 'openshift-origin-common'
-
-#gem 'openshift-origin-common', :path => 'vendor/common'
-#gem 'openshift-origin-controller', :path => 'vendor/controller'
-#gem 'netrc' # rest-client has an undeclared prereq on netrc
-#
-#gem 'openshift-origin-auth-mongo', :path => 'vendor/broker_plugins/mongo'
-#gem 'openshift-origin-msg-broker-mcollective', :path => 'vendor/broker_plugins/msg-broker/mcollective'
-
 gem 'openshift-origin-common'
 gem 'openshift-origin-controller'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
+# Note: It should be the first in order to override some of its' stuff
 gem 'openshift-origin-auth-mongo'
+if ENV['BROKER_PLUGINS_SOURCE']
+  gem 'openshift-freequant-account-mongo', :path => File.join(ENV['BROKER_PLUGINS_SOURCE'], 'account', 'mongo')
+else
+  gem 'openshift-freequant-account-mongo'
+end
 
+gem 'mcollective-client', '2.2.3'
+gem 'openshift-origin-msg-broker-mcollective'
 gem 'thin'
 
-# These gems are missing on heroku
-
-#group :development, :test do
+group :development, :test do
   # The require part from http://tinyurl.com/3pf68ho
   gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
   gem 'mocha', '~> 0.13.1', :require => false
@@ -60,4 +53,4 @@ gem 'thin'
   gem 'minitest'
   gem 'capybara', '~> 2.1.0', :require => false
   gem 'poltergeist',   '~> 1.2.0', :require => false
-#end
+end

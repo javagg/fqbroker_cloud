@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'stringio'
 
-ENV['OPENSHIFT_CONF_DIR'] = 'conf'
+ENV['OPENSHIFT_CONF_DIR'] = 'etc/openshift'
 
 conf_dir = ENV['OPENSHIFT_CONF_DIR'] || '/etc/openshift'
 unless ENV["RAILS_ENV"] == "test"

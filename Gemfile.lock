@@ -1,3 +1,11 @@
+PATH
+  remote: vendor/cache/mongo
+  specs:
+    openshift-freequant-account-mongo (0.0.1)
+      openshift-origin-controller
+      parseconfig
+      psych
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -67,6 +75,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mcollective-client (2.2.3)
+      json
+      stomp
+      systemu
     metaclass (0.0.1)
     mime-types (1.19)
     minitest (4.7.0)
@@ -87,17 +99,22 @@ GEM
     openshift-origin-auth-mongo (1.15.1)
       json
       openshift-origin-controller
-    openshift-origin-common (1.16.2)
+    openshift-origin-common (1.17.0)
       activemodel
       json
       safe_yaml
-    openshift-origin-controller (1.16.9)
+    openshift-origin-controller (1.17.0)
       activesupport (~> 3.2.8)
       dnsruby
       httpclient
       mongoid (>= 3.0.17)
       openshift-origin-common
       state_machine
+    openshift-origin-msg-broker-mcollective (1.17.0)
+      json
+      openshift-origin-controller
+      stomp
+      systemu
     origin (1.1.0)
     parseconfig (1.0.2)
     poltergeist (1.2.0)
@@ -146,6 +163,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     state_machine (1.1.2)
+    stomp (1.2.8)
     systemu (2.5.2)
     thin (1.5.0)
       daemons (>= 1.0.9)
@@ -171,15 +189,18 @@ DEPENDENCIES
   cucumber
   json
   json_pure
+  mcollective-client (= 2.2.3)
   minitest
   mocha (~> 0.13.1)
   mongo
   mongoid
   netrc
   open4
+  openshift-freequant-account-mongo!
   openshift-origin-auth-mongo
   openshift-origin-common
   openshift-origin-controller
+  openshift-origin-msg-broker-mcollective
   parseconfig (~> 1.0.2)
   poltergeist (~> 1.2.0)
   psych
