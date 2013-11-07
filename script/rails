@@ -4,8 +4,6 @@
 # Note, you need to have mod_ssl installed. Also, you will need
 # to run this script as sudo to bind to 443
 #
-ENV['BROKER_NO_SSL'] = "1"
-
 unless ENV['BROKER_NO_SSL']
   require 'rubygems'
   require 'rails/commands/server'
