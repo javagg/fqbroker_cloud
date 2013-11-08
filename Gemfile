@@ -48,12 +48,13 @@ gem 'thin'
 
 group :development, :test do
   # The require part from http://tinyurl.com/3pf68ho
-  gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
   gem 'mocha', '~> 0.13.1', :require => false
   gem 'rake', '>= 0.8.7'
   gem 'simplecov'
   gem 'cucumber'
   gem 'minitest'
   gem 'capybara', '~> 2.1.0', :require => false
-  gem 'poltergeist',   '~> 1.2.0', :require => false
+  gem 'poltergeist', '~> 1.2.0', :require => false
 end
+
+gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
