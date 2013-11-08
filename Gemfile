@@ -31,7 +31,6 @@ gem 'mcollective-client', '2.2.3'
 gem 'openshift-origin-common'
 gem 'openshift-origin-controller'
 gem 'openshift-origin-msg-broker-mcollective'
-gem 'openshift-origin-auth-mongo'
 gem 'openshift-origin-admin-console'
 gem 'openshift-origin-dns-nsupdate'
 
@@ -40,7 +39,7 @@ gem 'netrc' # rest-client has an undeclared prereq on netrc
 # Note: It should be the first in order to override some of its' stuff
 gem 'openshift-origin-auth-mongo'
 if ENV['BROKER_PLUGINS_SOURCE']
-  gem 'openshift-freequant-account-mongo', :path => File.join(ENV['BROKER_PLUGINS_SOURCE'], 'account', 'mongo')
+  gem 'openshift-freequant-account-mongo', path: File.join(ENV['BROKER_PLUGINS_SOURCE'], 'account', 'mongo')
 else
   gem 'openshift-freequant-account-mongo'
 end

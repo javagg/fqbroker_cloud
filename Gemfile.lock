@@ -1,11 +1,3 @@
-PATH
-  remote: vendor/cache/mongo
-  specs:
-    openshift-freequant-account-mongo (0.0.1)
-      openshift-origin-controller
-      parseconfig
-      psych
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -122,7 +114,11 @@ GEM
     netrc (0.7.7)
     nokogiri (1.5.9)
     open4 (1.3.0)
-    openshift-origin-admin-console (1.16.1)
+    openshift-freequant-account-mongo (0.0.1)
+      openshift-origin-controller
+      parseconfig
+      psych
+    openshift-origin-admin-console (1.16.2)
       coffee-rails (~> 3.2.2)
       compass-rails (~> 1.0.3)
       formtastic (~> 1.2.3)
@@ -139,11 +135,11 @@ GEM
     openshift-origin-auth-mongo (1.15.1)
       json
       openshift-origin-controller
-    openshift-origin-common (1.17.0)
+    openshift-origin-common (1.17.1)
       activemodel
       json
       safe_yaml
-    openshift-origin-controller (1.17.0)
+    openshift-origin-controller (1.17.1)
       activesupport (~> 3.2.8)
       dnsruby
       httpclient
@@ -153,7 +149,7 @@ GEM
     openshift-origin-dns-nsupdate (1.15.1)
       json
       openshift-origin-controller
-    openshift-origin-msg-broker-mcollective (1.17.0)
+    openshift-origin-msg-broker-mcollective (1.17.1)
       json
       openshift-origin-controller
       stomp
@@ -253,7 +249,7 @@ DEPENDENCIES
   mongoid
   netrc
   open4
-  openshift-freequant-account-mongo!
+  openshift-freequant-account-mongo
   openshift-origin-admin-console
   openshift-origin-auth-mongo
   openshift-origin-common
