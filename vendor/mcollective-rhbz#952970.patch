@@ -1,0 +1,33 @@
+diff -uNr mcollective-2.2.3.ORIG/plugins/mcollective/connector/activemq.rb mcollective-2.2.3/plugins/mcollective/connector/activemq.rb
+--- mcollective-2.2.3.ORIG/plugins/mcollective/connector/activemq.rb	2013-02-14 20:09:32.000000000 +0100
++++ mcollective-2.2.3/plugins/mcollective/connector/activemq.rb	2013-04-17 09:40:33.610287753 +0200
+@@ -307,6 +307,7 @@
+       def disconnect
+         Log.debug("Disconnecting from ActiveMQ")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       def headers_for(msg, identity=nil)
+diff -uNr mcollective-2.2.3.ORIG/plugins/mcollective/connector/rabbitmq.rb mcollective-2.2.3/plugins/mcollective/connector/rabbitmq.rb
+--- mcollective-2.2.3.ORIG/plugins/mcollective/connector/rabbitmq.rb	2013-02-14 20:09:32.000000000 +0100
++++ mcollective-2.2.3/plugins/mcollective/connector/rabbitmq.rb	2013-04-17 09:40:54.404287753 +0200
+@@ -260,6 +260,7 @@
+       def disconnect
+         Log.debug("Disconnecting from RabbitMQ")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       # looks in the environment first then in the config file
+diff -uNr mcollective-2.2.3.ORIG/plugins/mcollective/connector/stomp.rb mcollective-2.2.3/plugins/mcollective/connector/stomp.rb
+--- mcollective-2.2.3.ORIG/plugins/mcollective/connector/stomp.rb	2013-02-14 20:09:32.000000000 +0100
++++ mcollective-2.2.3/plugins/mcollective/connector/stomp.rb	2013-04-17 09:41:12.967287752 +0200
+@@ -271,6 +271,7 @@
+       def disconnect
+         Log.debug("Disconnecting from Stomp")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       def msgheaders
