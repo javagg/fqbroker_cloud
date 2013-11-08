@@ -26,9 +26,9 @@ unless ENV['BROKER_NO_SSL']
                   :SSLEnable => true,
                   :SSLVerifyClient => OpenSSL::SSL::VERIFY_NONE,
                   :SSLPrivateKey => OpenSSL::PKey::RSA.new(
-                         File.open("/etc/pki/tls/private/localhost.key").read),
+                         File.open("etc/pki/tls/private/localhost.key").read),
                   :SSLCertificate => OpenSSL::X509::Certificate.new(
-                         File.open("/etc/pki/tls/certs/localhost.crt").read),
+                         File.open("etc/pki/tls/certs/localhost.crt").read),
                   :SSLCertName => [["CN", WEBrick::Utils::getservername]]
               })
           end
