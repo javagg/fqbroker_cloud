@@ -47,7 +47,6 @@ gem 'openshift-origin-controller', path: 'vendor/gems/controller'
 gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-broker'
 gem 'openshift-origin-admin-console', path: 'vendor/gems/admin-console'
 gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
-
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 # Note: It should be the first in order to override some of its' stuff
