@@ -28,28 +28,39 @@ end
 gem 'mongo'
 gem 'mcollective-client', '2.2.3'
 
-if ENV['ORIGIN_SOURCE']
-gem 'openshift-origin-common', path: File.join(ENV['ORIGIN_SOURCE'], 'common')
-gem 'openshift-origin-controller', path: File.join(ENV['ORIGIN_SOURCE'], 'controller')
-gem 'openshift-origin-msg-broker-mcollective', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'msg-broker')
+#if ENV['ORIGIN_SOURCE']
+#gem 'openshift-origin-common', path: File.join(ENV['ORIGIN_SOURCE'], 'common')
+#gem 'openshift-origin-controller', path: File.join(ENV['ORIGIN_SOURCE'], 'controller')
+#gem 'openshift-origin-msg-broker-mcollective', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'msg-broker')
+##gem 'openshift-origin-admin-console', path: File.join(ENV['ORIGIN_SOURCE'], 'admin-console')
+#gem 'openshift-origin-dns-nsupdate', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'dns', 'nsupdate')
+#else
+#  gem 'openshift-origin-common'
+#  gem 'openshift-origin-controller'
+#  gem 'openshift-origin-msg-broker-mcollective'
+##gem 'openshift-origin-admin-console'
+#  gem 'openshift-origin-dns-nsupdate'
+#end
+
+gem 'openshift-origin-common', path: 'vendor/gems/common'
+gem 'openshift-origin-controller', path: 'vendor/gems/controller'
+gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-broker'
 #gem 'openshift-origin-admin-console', path: File.join(ENV['ORIGIN_SOURCE'], 'admin-console')
-gem 'openshift-origin-dns-nsupdate', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'dns', 'nsupdate')
-else
-  gem 'openshift-origin-common'
-  gem 'openshift-origin-controller'
-  gem 'openshift-origin-msg-broker-mcollective'
-#gem 'openshift-origin-admin-console'
-  gem 'openshift-origin-dns-nsupdate'
-end
+gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
+
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 # Note: It should be the first in order to override some of its' stuff
-gem 'openshift-origin-auth-mongo'
-if ENV['BROKER_PLUGINS_SOURCE']
-  gem 'openshift-freequant-account-mongo', path: File.join(ENV['BROKER_PLUGINS_SOURCE'], 'account', 'mongo')
-else
-  gem 'openshift-freequant-account-mongo'
-end
+#gem 'openshift-origin-auth-mongo'
+#if ENV['BROKER_PLUGINS_SOURCE']
+#  gem 'openshift-freequant-account-mongo', path: File.join(ENV['BROKER_PLUGINS_SOURCE'], 'account', 'mongo')
+#else
+#  gem 'openshift-freequant-account-mongo'
+#end
+
+gem 'openshift-origin-auth-mongo', path: 'vendor/gems/plugins/auth/mongo'
+gem 'openshift-freequant-account-mongo', path: 'vendor/gems/plugins/account/mongo'
+
 
 gem 'thin'
 

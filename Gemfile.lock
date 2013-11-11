@@ -1,3 +1,53 @@
+PATH
+  remote: vendor/gems/common
+  specs:
+    openshift-origin-common (1.17.1)
+      activemodel
+      json
+      safe_yaml
+
+PATH
+  remote: vendor/gems/controller
+  specs:
+    openshift-origin-controller (1.17.2)
+      activesupport (~> 3.2.8)
+      dnsruby
+      httpclient
+      mongoid (>= 3.0.17)
+      openshift-origin-common
+      state_machine
+
+PATH
+  remote: vendor/gems/plugins/account/mongo
+  specs:
+    openshift-freequant-account-mongo (0.0.1)
+      openshift-origin-controller
+      parseconfig
+      psych
+
+PATH
+  remote: vendor/gems/plugins/auth/mongo
+  specs:
+    openshift-origin-auth-mongo (1.15.1)
+      json
+      openshift-origin-controller
+
+PATH
+  remote: vendor/gems/plugins/dns/nsupdate
+  specs:
+    openshift-origin-dns-nsupdate (1.15.1)
+      json
+      openshift-origin-controller
+
+PATH
+  remote: vendor/gems/plugins/msg-broker
+  specs:
+    openshift-origin-msg-broker-mcollective (1.17.1)
+      json
+      openshift-origin-controller
+      stomp
+      systemu
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -88,32 +138,6 @@ GEM
     netrc (0.7.7)
     nokogiri (1.5.9)
     open4 (1.3.0)
-    openshift-freequant-account-mongo (0.0.1)
-      openshift-origin-controller
-      parseconfig
-      psych
-    openshift-origin-auth-mongo (1.15.1)
-      json
-      openshift-origin-controller
-    openshift-origin-common (1.17.1)
-      activemodel
-      json
-      safe_yaml
-    openshift-origin-controller (1.17.2)
-      activesupport (~> 3.2.8)
-      dnsruby
-      httpclient
-      mongoid (>= 3.0.17)
-      openshift-origin-common
-      state_machine
-    openshift-origin-dns-nsupdate (1.15.1)
-      json
-      openshift-origin-controller
-    openshift-origin-msg-broker-mcollective (1.17.1)
-      json
-      openshift-origin-controller
-      stomp
-      systemu
     origin (1.1.0)
     parseconfig (1.0.2)
     poltergeist (1.2.0)
@@ -195,12 +219,12 @@ DEPENDENCIES
   mongoid
   netrc
   open4
-  openshift-freequant-account-mongo
-  openshift-origin-auth-mongo
-  openshift-origin-common
-  openshift-origin-controller
-  openshift-origin-dns-nsupdate
-  openshift-origin-msg-broker-mcollective
+  openshift-freequant-account-mongo!
+  openshift-origin-auth-mongo!
+  openshift-origin-common!
+  openshift-origin-controller!
+  openshift-origin-dns-nsupdate!
+  openshift-origin-msg-broker-mcollective!
   parseconfig (~> 1.0.2)
   poltergeist (~> 1.2.0)
   psych
