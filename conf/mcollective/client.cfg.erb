@@ -14,7 +14,7 @@ plugin.psk = unset
 
 connector = activemq
 plugin.activemq.pool.size = 1
-plugin.activemq.pool.1.host = 115.29.34.64
+plugin.activemq.pool.1.host = <%= ENV["ACTIVEMQ_HOST"] || "localhost" %>
 plugin.activemq.pool.1.port = 61613
 plugin.activemq.pool.1.user = mcollective
 plugin.activemq.pool.1.password = marionett

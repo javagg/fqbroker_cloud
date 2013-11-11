@@ -28,12 +28,19 @@ end
 gem 'mongo'
 gem 'mcollective-client', '2.2.3'
 
-gem 'openshift-origin-common'
-gem 'openshift-origin-controller'
-gem 'openshift-origin-msg-broker-mcollective'
+if ENV['ORIGIN_SOURCE']
+gem 'openshift-origin-common', path: File.join(ENV['ORIGIN_SOURCE'], 'common')
+gem 'openshift-origin-controller', path: File.join(ENV['ORIGIN_SOURCE'], 'controller')
+gem 'openshift-origin-msg-broker-mcollective', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'msg-broker')
+#gem 'openshift-origin-admin-console', path: File.join(ENV['ORIGIN_SOURCE'], 'admin-console')
+gem 'openshift-origin-dns-nsupdate', path: File.join(ENV['ORIGIN_SOURCE'], 'plugins', 'dns', 'nsupdate')
+else
+  gem 'openshift-origin-common'
+  gem 'openshift-origin-controller'
+  gem 'openshift-origin-msg-broker-mcollective'
 #gem 'openshift-origin-admin-console'
-gem 'openshift-origin-dns-nsupdate'
-
+  gem 'openshift-origin-dns-nsupdate'
+end
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 # Note: It should be the first in order to override some of its' stuff
