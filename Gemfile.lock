@@ -13,7 +13,6 @@ PATH
       rails (~> 3.2.8)
       sass-rails (~> 3.2.5)
       sass-twitter-bootstrap (~> 2.0.1)
-      therubyracer (>= 0.10)
       uglifier (>= 1.2.6)
 
 PATH
@@ -215,7 +214,6 @@ GEM
     rake (10.0.4)
     rdoc (4.0.1)
       json (~> 1.4)
-    ref (1.0.0)
     regin (0.3.8)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -241,8 +239,6 @@ GEM
     state_machine (1.1.2)
     stomp (1.2.8)
     systemu (2.5.2)
-    therubyracer (0.11.0)
-      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
