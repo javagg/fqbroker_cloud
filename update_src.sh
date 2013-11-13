@@ -12,6 +12,7 @@ MSG_COMMON=$ORIGIN_SERVER_SRC/msg-common
 mkdir -p msg-common/mcollective
 cp -rf $MSG_COMMON/agent msg-common/mcollective
 
+rm -rf vendor/gems
 mkdir -p vendor/gems
 for dir in common controller plugins/msg-broker/mcollective plugins/auth/mongo plugins/dns/nsupdate
 do
