@@ -9,7 +9,7 @@
 
 Summary:       Cloud Development Controller
 Name:          rubygem-%{gem_name}
-Version: 1.17.2
+Version: 1.17.4
 Release:       1%{?dist}
 Group:         Development/Languages
 License:       ASL 2.0
@@ -85,6 +85,30 @@ mkdir -p %{buildroot}/etc/openshift/
 %{gem_dir}/doc/%{gem_name}-%{version}
 
 %changelog
+* Tue Nov 12 2013 Adam Miller <admiller@redhat.com> 1.17.4-1
+- Merge pull request #4164 from
+  liggitt/bug_1029166_improve_domain_configure_error (dmcphers@redhat.com)
+- Merge pull request #4167 from
+  smarterclayton/not_using_index_for_authorizations
+  (dmcphers+openshiftbot@redhat.com)
+- No index on authorizations table (ccoleman@redhat.com)
+- Bug 1021380 (dmcphers@redhat.com)
+- Merge pull request #4122 from jwforres/bug_1025691_add_member_using_token
+  (dmcphers+openshiftbot@redhat.com)
+- Fix bug 1029166: Improve error message on domain configure
+  (jliggitt@redhat.com)
+- Bug 1025691 - can't add member to a domain when authenticate with token
+  (jforrest@redhat.com)
+
+* Mon Nov 11 2013 Adam Miller <admiller@redhat.com> 1.17.3-1
+- Merge pull request #4139 from abhgupta/abhgupta-dev
+  (dmcphers+openshiftbot@redhat.com)
+- Merge pull request #4140 from rajatchopra/master
+  (dmcphers+openshiftbot@redhat.com)
+- Fix for bug 1028284 (abhgupta@redhat.com)
+- set_group_override fix (rchopra@redhat.com)
+- port interface being removed may not exist (rchopra@redhat.com)
+
 * Fri Nov 08 2013 Adam Miller <admiller@redhat.com> 1.17.2-1
 - Fix cartridge extended tests: force erasure of installed cartridges during
   tests (pmorie@gmail.com)

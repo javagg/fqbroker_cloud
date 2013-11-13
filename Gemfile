@@ -34,9 +34,13 @@ gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-br
 gem 'openshift-origin-admin-console', path: 'vendor/gems/admin-console'
 gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
 gem 'netrc' # rest-client has an undeclared prereq on netrc
-
 gem 'openshift-origin-auth-mongo', path: 'vendor/gems/plugins/auth/mongo'
-gem 'openshift-freequant-account-mongo', path: 'vendor/gems/plugins/account/mongo'
+
+if ENV["FQ_SERVER_SRC"]
+  gem 'openshift-freequant-account-mongo', path: File.join(ENV['FQ_SERVER_SRC'], 'plugins', 'account', 'mongo')
+else
+  gem 'openshift-freequant-account-mongo', path: 'vendor/gems/plugins/account/mongo'
+end
 
 gem 'thin'
 
