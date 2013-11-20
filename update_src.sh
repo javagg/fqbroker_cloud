@@ -9,6 +9,7 @@ ORIGIN_SERVER_SRC=$1
 FQ_SERVER_SRC=$2
 
 MSG_COMMON=$ORIGIN_SERVER_SRC/msg-common
+rm -rf msg-common/mcollective
 mkdir -p msg-common/mcollective
 cp -rf $MSG_COMMON/agent msg-common/mcollective
 

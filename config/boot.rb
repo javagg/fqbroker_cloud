@@ -1,14 +1,19 @@
 require 'rubygems'
 require 'stringio'
 
-ENV['OPENSHIFT_CONF_DIR'] = 'etc/openshift'
-
 conf_dir = ENV['OPENSHIFT_CONF_DIR'] || '/etc/openshift'
 unless ENV["RAILS_ENV"] == "test"
   ENV["RAILS_ENV"] = File.exist?(conf_dir+'/development') ? "development" : "production"
 end
 
 ENV['RAILS_LOG_PATH'] = "log/#{ENV["RAILS_ENV"]}.log"
+
+# Write config files using info from ENV
+require 'erb'
+File.open(File.expand_path(File.join(File.dirname(__FILE__), '..', 'etc', 'mcollective', 'client.cfg')), "w") do |f|
+  template = File.expand_path(File.join(File.dirname(__FILE__), '..', 'conf', 'mcollective', 'client.cfg.erb'))
+  f.puts ERB.new(IO.read(template)).result
+end
 
 # Set up gems listed in the Gemfile.
 gem_file = ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)

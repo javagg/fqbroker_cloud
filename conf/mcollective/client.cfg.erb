@@ -12,9 +12,25 @@ direct_addressing = 1
 securityprovider = psk
 plugin.psk = unset
 
+<%
+require 'uri'
+if activemq_url = ENV["ACTIVEMQ_URL"]
+  activemq_uri = URI.parse(activemq_url)
+%>
 connector = activemq
 plugin.activemq.pool.size = 1
-plugin.activemq.pool.1.host = <%= ENV["ACTIVEMQ_HOST"] || "localhost" %>
-plugin.activemq.pool.1.port = 61613
-plugin.activemq.pool.1.user = mcollective
-plugin.activemq.pool.1.password = marionett
+plugin.activemq.pool.1.host = <%= activemq_uri.host %>
+plugin.activemq.pool.1.port = <%= activemq_uri.port %>
+plugin.activemq.pool.1.user = <%= activemq_uri.user %>
+plugin.activemq.pool.1.password = <%= activemq_uri.password %>
+<%
+elsif amqp_url = ENV['AMQP_URL'] || ENV['RABBITMQ_BIGWIG_URL']
+   amqp_uri = URI.parse(amqp_url)
+%>
+connector = amqp
+plugin.amqp.host = <%= amqp_uri.host %>
+plugin.amqp.port = <%= amqp_uri.port %>
+plugin.amqp.user = <%= amqp_uri.user %>
+plugin.amqp.password = <%= amqp_uri.password %>
+plugin.amqp.vhost = <%= amqp_uri.path %>
+<% end %>

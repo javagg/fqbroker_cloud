@@ -27,6 +27,7 @@ end
 # the mongo rubygem:
 gem 'mongo'
 gem 'mcollective-client', '2.2.3'
+gem 'bunny'
 
 gem 'openshift-origin-common', path: 'vendor/gems/common'
 gem 'openshift-origin-controller', path: 'vendor/gems/controller'
@@ -42,8 +43,6 @@ else
   gem 'openshift-freequant-account-mongo', path: 'vendor/gems/plugins/account/mongo'
 end
 
-gem 'thin'
-
 group :development, :test do
   # The require part from http://tinyurl.com/3pf68ho
   gem 'mocha', '~> 0.13.1', :require => false
@@ -51,8 +50,10 @@ group :development, :test do
   gem 'simplecov'
   gem 'cucumber'
   gem 'minitest'
-  gem 'capybara', '~> 2.1.0', :require => false
-  gem 'poltergeist', '~> 1.2.0', :require => false
+  #gem 'capybara', '~> 2.1.0', :require => false
+  #gem 'poltergeist', '~> 1.2.0', :require => false
 end
 
 gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
+
+ruby '2.0.0'

@@ -4,6 +4,10 @@
 # Note, you need to have mod_ssl installed. Also, you will need
 # to run this script as sudo to bind to 443
 #
+
+# Set this before openshift-origin-common is require
+ENV['OPENSHIFT_CONF_DIR'] = 'etc/openshift'
+
 unless ENV['BROKER_NO_SSL']
   require 'rubygems'
   require 'rails/commands/server'
