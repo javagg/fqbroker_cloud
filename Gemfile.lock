@@ -1,12 +1,4 @@
 PATH
-  remote: /home/alex/freequant-server/plugins/account/mongo
-  specs:
-    openshift-freequant-account-mongo (0.0.1)
-      openshift-origin-controller
-      parseconfig
-      psych
-
-PATH
   remote: vendor/gems/admin-console
   specs:
     openshift-origin-admin-console (1.17.0)
@@ -41,6 +33,14 @@ PATH
       mongoid (>= 3.0.17)
       openshift-origin-common
       state_machine
+
+PATH
+  remote: vendor/gems/plugins/account/mongo
+  specs:
+    openshift-freequant-account-mongo (0.0.1)
+      openshift-origin-controller
+      parseconfig
+      psych
 
 PATH
   remote: vendor/gems/plugins/auth/mongo
