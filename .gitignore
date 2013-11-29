@@ -1,3 +1,9 @@
 .idea
 log/*.log
 tmp
+
+# auto-genenrated
+etc/mcollective/client.cfg
+
+# heroku will recompile them
+public/assets
