@@ -100,7 +100,7 @@ class RestEmbeddedCartridge < OpenShift::Model
     :help_topics, :links, :properties, :display_name, :description, :scales_from,
     :scales_to, :current_scale, :supported_scales_from, :supported_scales_to,
     :scales_with, :base_gear_storage, :additional_gear_storage, :gear_profile, :collocated_with,
-    :status_messages, :usage_rates
+    :status_messages, :usage_rates, :obsolete
 
   def initialize(cart, comp, app, cinst, colocated_cinsts, scale, url, status_messages, nolinks=false)
     self.name = cart.name
@@ -124,6 +124,7 @@ class RestEmbeddedCartridge < OpenShift::Model
     self.type = "standalone"
     self.type = "embedded" if cart.is_embeddable?
     self.usage_rates = cart.usage_rates
+    self.obsolete = cart.is_obsolete?
 
     unless scale.nil?
       self.scales_from = scale[:min]
@@ -133,7 +134,7 @@ class RestEmbeddedCartridge < OpenShift::Model
       if cinst.is_sparse?
         self.scales_from = cinst.get_component.scaling.min
         self.scales_to = cinst.get_component.scaling.max
-        self.current_scale = cinst.group_instance.get_gears(cinst).length
+        self.current_scale = cinst.gears.length
       end
       self.gear_profile = scale[:gear_size]
       self.base_gear_storage = Gear.base_filesystem_gb(self.gear_profile)

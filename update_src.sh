@@ -8,10 +8,14 @@ fi
 ORIGIN_SERVER_SRC=$1
 FQ_SERVER_SRC=$2
 
-MSG_COMMON=$ORIGIN_SERVER_SRC/msg-common
-rm -rf msg-common/mcollective
-mkdir -p msg-common/mcollective
-cp -rf $MSG_COMMON/agent msg-common/mcollective
+rm -rf vendor/mcollective/origin
+mkdir -p vendor/mcollective/origin/msg-common/mcollective/agent
+cp -rf $ORIGIN_SERVER_SRC/msg-common/agent/openshift.ddl vendor/mcollective/origin/msg-common/mcollective/agent
+
+rm -rf vendor/mcollective/freequant
+mkdir -p vendor/mcollective/freequant/msg-common/mcollective/agent
+cp -rf $FQ_SERVER_SRC/msg-common/agent/openshift.ddl vendor/mcollective/freequant/msg-common/mcollective/agent
+cp -rf $FQ_SERVER_SRC/msg-common/connector/amqp.rb vendor/mcollective/plugins/mcollective/connector
 
 rm -rf vendor/gems
 mkdir -p vendor/gems
@@ -53,3 +57,6 @@ if [ ! -z "$FQ_SERVER_SRC" ]; then
     popd
   done
 fi
+
+# Patch mcollective
+cp -rf $FQ_SERVER_SRC/msg-common/{agents_patch.rb,ddl_base_patch.rb} vendor/mcollective

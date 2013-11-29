@@ -34,7 +34,6 @@ module MCollective
         @empty_cond = @buf.new_cond
 
         @channel = nil
-        @queue = nil
       end
 
       def connect
@@ -49,7 +48,7 @@ module MCollective
         port = get_option("amqp.port", 5672).to_i
         user = get_option("amqp.user")
         password = get_option("amqp.password")
-        vhost = get_option("amqp.prefix")
+        vhost = get_option("amqp.vhost")
         url = "amqp://#{user}:#{password}@#{host}:#{port}#{vhost}"
         ampq_options = {}
 

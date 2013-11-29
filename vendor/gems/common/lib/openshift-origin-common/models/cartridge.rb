@@ -4,7 +4,7 @@ module OpenShift
                   :provides, :requires, :conflicts, :suggests, :native_requires, :default_profile,
                   :path, :license_url, :categories, :website, :suggests_feature,
                   :help_topics, :cart_data_def, :additional_control_actions, :versions, :cartridge_vendor,
-                  :endpoints
+                  :endpoints, :obsolete
     attr_reader   :profiles
     
     def initialize
@@ -94,6 +94,10 @@ module OpenShift
     def is_deployable?
       return categories.include?('web_framework')
     end
+    
+    def is_obsolete?
+      return obsolete || false
+    end
 
     # For now, these are synonyms
     alias :is_buildable? :is_deployable?
@@ -155,6 +159,7 @@ module OpenShift
         @_profile_map[p.name] = p
       end
       self.default_profile = spec_hash["Default-Profile"] || self.profiles.first.name
+      self.obsolete = spec_hash["Obsolete"] || false
       self
     end
 
@@ -192,7 +197,7 @@ module OpenShift
       h["Vendor"] = self.vendor if self.vendor and !self.vendor.empty? and self.vendor != "unknown"
       h["Cartridge-Vendor"] = self.cartridge_vendor if self.cartridge_vendor and !self.cartridge_vendor.empty? and self.cartridge_vendor != "unknown"
       h["Default-Profile"] = self.default_profile if !self.default_profile.nil? and !self.default_profile.empty? and !@_profile_map[@default_profile].generated
-    
+      h["Obsolete"] = self.obsolete if !self.obsolete.nil? and self.obsolete
       if self.endpoints.length > 0
         h["Endpoints"] = self.endpoints.map { |e| e.to_descriptor }
       end

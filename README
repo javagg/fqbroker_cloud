@@ -14,3 +14,7 @@ git add .
 Make sure ACTIVEMQ_HOST is set
 heroku config:set ACTIVEMQ_HOST=`your activemq server`
 heroku run rake mcollective:config
+
+
+test stuff
+amqp://52M4fJ-H:0ELRTZnAChnQ9tpOcIUOADBcNN6PP2tR@sad-bartsia-13.bigwig.lshift.net:10110/0yB_Vx174S32
