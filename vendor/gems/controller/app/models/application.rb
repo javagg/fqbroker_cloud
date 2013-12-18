@@ -1518,10 +1518,14 @@ class Application
   
         #rollback
         begin
+          # reload the application before a rollback
+          self.reload
           op_group.execute_rollback(result_io)
           op_group.delete
           num_gears_recovered = op_group.num_gears_added - op_group.num_gears_created + op_group.num_gears_rolled_back + op_group.num_gears_destroyed
           op_group.unreserve_gears(num_gears_recovered, self)
+        rescue Mongoid::Errors::DocumentNotFound
+          # ignore if the application is already deleted
         rescue Exception => e_rollback
           Rails.logger.error "Error during rollback"
           Rails.logger.error e_rollback.message
@@ -1704,7 +1708,7 @@ class Application
 
     gear_id_prereqs.each_key do |gear_id|
       prereq = gear_id_prereqs[gear_id].nil? ? [] : [gear_id_prereqs[gear_id]]
-      pending_ops.push(UpdateAppConfigOp.new(gear_id: gear_id, prereq: prereq, recalculate_sshkeys: true, add_env_vars: env_vars))
+      pending_ops.push(UpdateAppConfigOp.new(gear_id: gear_id, prereq: prereq, recalculate_sshkeys: true, add_env_vars: env_vars, config: (self.config || {})))
     end
 
     if app_dns_gear_id

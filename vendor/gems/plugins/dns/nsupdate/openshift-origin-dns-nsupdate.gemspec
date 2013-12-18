@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Krishna Raman"]
-  s.date = "2013-11-29"
+  s.date = "2013-12-17"
   s.description = "Provides"
   s.email = ["kraman@gmail.com"]
   s.files = ["lib/openshift-origin-dns-nsupdate.rb", "lib/nsupdate_dns_engine.rb", "lib/openshift/nsupdate_plugin.rb", "conf/openshift-origin-dns-nsupdate.conf.example", "config/initializers/openshift-origin-dns-nsupdate.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-dns-nsupdate.spec", "openshift-origin-dns-nsupdate.gemspec", "LICENSE", "COPYRIGHT"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.licenses = ["ASL"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "openshift-origin-dns-nsupdate"
-  s.rubygems_version = "2.0.13"
+  s.rubygems_version = "2.0.14"
   s.summary = "Provides"
 
   if s.respond_to? :specification_version then

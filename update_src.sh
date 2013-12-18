@@ -15,6 +15,7 @@ cp -rf $ORIGIN_SERVER_SRC/msg-common/agent/openshift.ddl vendor/mcollective/orig
 rm -rf vendor/mcollective/freequant
 mkdir -p vendor/mcollective/freequant/msg-common/mcollective/agent
 cp -rf $FQ_SERVER_SRC/msg-common/agent/openshift.ddl vendor/mcollective/freequant/msg-common/mcollective/agent
+mkdir -p vendor/mcollective/plugins/mcollective/connector
 cp -rf $FQ_SERVER_SRC/msg-common/connector/amqp.rb vendor/mcollective/plugins/mcollective/connector
 
 rm -rf vendor/gems
@@ -44,7 +45,7 @@ popd
 
 # Our additional plugins
 if [ ! -z "$FQ_SERVER_SRC" ]; then
-  for dir in plugins/account/mongo
+  for dir in plugins/account/mongo plugins/dns/dnspod
   do
     base_dir=$(dirname $dir)
     mkdir -p vendor/gems/$base_dir

@@ -1788,6 +1788,7 @@ module OpenShift
         start_order, stop_order = app.calculate_component_orders
         source_container = gear.get_proxy
         start_order.each do |cinst|
+          next unless gear_components.include? cinst 
           cart = cinst.cartridge_name
           idle, leave_stopped = state_map[cart]
           unless leave_stopped
@@ -2810,7 +2811,7 @@ module OpenShift
       def has_uid_or_gid?(uid)
         return false if uid.nil?
         MCollectiveApplicationContainerProxy.rpc_exec('openshift', @id) do |client|
-          client.has_uid_or_gid(:uid => uid.to_s) do |response|
+          client.has_uid_or_gid(:uid => uid.to_i) do |response|
             output = response[:body][:data][:output]
             return output == true
           end

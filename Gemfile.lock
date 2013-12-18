@@ -1,7 +1,7 @@
 PATH
   remote: vendor/gems/admin-console
   specs:
-    openshift-origin-admin-console (1.17.0)
+    openshift-origin-admin-console (1.17.1)
       coffee-rails (~> 3.2.2)
       compass-rails (~> 1.0.3)
       formtastic (~> 1.2.3)
@@ -18,7 +18,7 @@ PATH
 PATH
   remote: vendor/gems/common
   specs:
-    openshift-origin-common (1.18.0)
+    openshift-origin-common (1.18.2)
       activemodel
       json
       safe_yaml
@@ -26,7 +26,7 @@ PATH
 PATH
   remote: vendor/gems/controller
   specs:
-    openshift-origin-controller (1.18.0)
+    openshift-origin-controller (1.19.1)
       activesupport (~> 3.2.8)
       dnsruby
       httpclient
@@ -50,16 +50,15 @@ PATH
       openshift-origin-controller
 
 PATH
-  remote: vendor/gems/plugins/dns/nsupdate
+  remote: vendor/gems/plugins/dns/dnspod
   specs:
-    openshift-origin-dns-nsupdate (1.15.1)
-      json
+    openshift-origin-dns-dnspod (0.0.1)
       openshift-origin-controller
 
 PATH
   remote: vendor/gems/plugins/msg-broker
   specs:
-    openshift-origin-msg-broker-mcollective (1.18.0)
+    openshift-origin-msg-broker-mcollective (1.19.1)
       json
       openshift-origin-controller
       stomp
@@ -125,7 +124,7 @@ GEM
       diff-lcs (>= 1.1.3)
       gherkin (~> 2.11.0)
       json (>= 1.4.6)
-    diff-lcs (1.1.3)
+    diff-lcs (1.2.4)
     dnsruby (1.53)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -198,7 +197,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (>= 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.0.4)
+    rake (10.1.0)
     rdoc (4.0.1)
       json (~> 1.4)
     regin (0.3.8)
@@ -259,7 +258,7 @@ DEPENDENCIES
   openshift-origin-auth-mongo!
   openshift-origin-common!
   openshift-origin-controller!
-  openshift-origin-dns-nsupdate!
+  openshift-origin-dns-dnspod!
   openshift-origin-msg-broker-mcollective!
   parseconfig (~> 1.0.2)
   psych

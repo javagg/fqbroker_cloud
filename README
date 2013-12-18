@@ -11,10 +11,16 @@ git add .
 ......
 
 ===Before restart
-Make sure ACTIVEMQ_HOST is set
-heroku config:set ACTIVEMQ_HOST=`your activemq server`
-heroku run rake mcollective:config
+when no ssl, run
+  heroku config:set BROKER_NO_SSL="1"
 
+when use amqp server, run
+  heroku config:set AMQP_URL="[your ampq server url]"
+when use activemq server, run
+  heroku config:set ACTIVEMQ_URL="[your activemq server url]"
+
+
+MONGOLAB_URI is set by default by heroku
 
 test stuff
 amqp://52M4fJ-H:0ELRTZnAChnQ9tpOcIUOADBcNN6PP2tR@sad-bartsia-13.bigwig.lshift.net:10110/0yB_Vx174S32

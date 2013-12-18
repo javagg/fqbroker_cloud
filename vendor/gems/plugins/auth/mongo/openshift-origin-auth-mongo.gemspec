@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Krishna Raman"]
-  s.date = "2013-11-29"
+  s.date = "2013-12-17"
   s.description = "Provides"
   s.email = ["kraman@gmail.com"]
   s.executables = ["oo-register-user"]
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.licenses = ["ASL"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "openshift-origin-auth-mongo"
-  s.rubygems_version = "2.0.13"
+  s.rubygems_version = "2.0.14"
   s.summary = "Provides"
   s.test_files = ["test/test_helper.rb", "test/dummy/script/rails", "test/dummy/db/seeds.rb", "test/dummy/test/test_helper.rb", "test/dummy/test/performance/browsing_test.rb", "test/dummy/app/helpers/application_helper.rb", "test/dummy/app/controllers/application_controller.rb", "test/dummy/app/views/layouts/application.html.erb", "test/dummy/README", "test/dummy/config.ru", "test/dummy/doc/README_FOR_APP", "test/dummy/public/404.html", "test/dummy/public/500.html", "test/dummy/public/images/rails.png", "test/dummy/public/422.html", "test/dummy/public/favicon.ico", "test/dummy/public/index.html", "test/dummy/public/robots.txt", "test/dummy/public/javascripts/controls.js", "test/dummy/public/javascripts/rails.js", "test/dummy/public/javascripts/effects.js", "test/dummy/public/javascripts/dragdrop.js", "test/dummy/public/javascripts/prototype.js", "test/dummy/public/javascripts/application.js", "test/dummy/config/database.yml", "test/dummy/config/environment.rb", "test/dummy/config/environments/test.rb", "test/dummy/config/initializers/session_store.rb", "test/dummy/config/initializers/inflections.rb", "test/dummy/config/initializers/secret_token.rb", "test/dummy/config/initializers/backtrace_silencers.rb", "test/dummy/config/initializers/mime_types.rb", "test/dummy/config/application.rb", "test/dummy/config/locales/en.yml", "test/dummy/config/boot.rb", "test/dummy/config/routes.rb", "test/dummy/Rakefile", "test/dummy/Gemfile", "test/functional/account_controller_test.rb"]
 
