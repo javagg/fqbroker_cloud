@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Krishna Raman"]
-  s.date = "2013-12-17"
+  s.date = "2013-12-18"
   s.description = "This"
   s.email = ["kraman@gmail.com"]
   s.files = ["lib/openshift-origin-common.rb", "lib/openshift-origin-common/exceptions/oo_exception.rb", "lib/openshift-origin-common/config.rb", "lib/openshift-origin-common/models/model.rb", "lib/openshift-origin-common/models/profile.rb", "lib/openshift-origin-common/models/component.rb", "lib/openshift-origin-common/models/endpoint.rb", "lib/openshift-origin-common/models/manifest.rb", "lib/openshift-origin-common/models/connection.rb", "lib/openshift-origin-common/models/scaling.rb", "lib/openshift-origin-common/models/cartridge.rb", "lib/openshift-origin-common/models/connector.rb", "lib/openshift-origin-common/utils/file_needs_sync.rb", "lib/openshift-origin-common/utils/git.rb", "lib/openshift-origin-common/utils/path_utils.rb", "lib/openshift-origin-common/utils/etc_utils.rb", "test/test_helper.rb", "test/coverage_helper.rb", "test/unit/manifest_test.rb", "test/unit/etc_utils_test.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-common.spec", "openshift-origin-common.gemspec", "LICENSE", "COPYRIGHT"]
