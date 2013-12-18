@@ -56,13 +56,6 @@ PATH
       openshift-origin-controller
 
 PATH
-  remote: vendor/gems/plugins/dns/nsupdate
-  specs:
-    openshift-origin-dns-nsupdate (1.15.1)
-      json
-      openshift-origin-controller
-
-PATH
   remote: vendor/gems/plugins/msg-broker
   specs:
     openshift-origin-msg-broker-mcollective (1.19.1)
@@ -266,7 +259,6 @@ DEPENDENCIES
   openshift-origin-common!
   openshift-origin-controller!
   openshift-origin-dns-dnspod!
-  openshift-origin-dns-nsupdate!
   openshift-origin-msg-broker-mcollective!
   parseconfig (~> 1.0.2)
   psych

@@ -34,7 +34,9 @@ gem 'openshift-origin-controller', path: 'vendor/gems/controller'
 gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-broker'
 gem 'openshift-origin-admin-console', path: 'vendor/gems/admin-console'
 
-gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
+#gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
+gem 'openshift-origin-dns-dnspod', path: 'vendor/gems/plugins/dns/dnspod'
+
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 gem 'openshift-origin-auth-mongo', path: 'vendor/gems/plugins/auth/mongo'
