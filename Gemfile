@@ -34,7 +34,7 @@ gem 'openshift-origin-controller', path: 'vendor/gems/controller'
 gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-broker'
 gem 'openshift-origin-admin-console', path: 'vendor/gems/admin-console'
 gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
-gem 'netrc' # rest-client has an undeclared prereq on netrc
+#gem 'netrc' # rest-client has an undeclared prereq on netrc
 gem 'openshift-origin-auth-mongo', path: 'vendor/gems/plugins/auth/mongo'
 
 if ENV["FQ_SERVER_SRC"]
@@ -56,4 +56,4 @@ end
 
 gem 'rest-client', '>= 1.6.1', '<= 1.6.7', :require => 'rest-client'
 
-ruby '2.0.0'
+#ruby '2.0.0'
