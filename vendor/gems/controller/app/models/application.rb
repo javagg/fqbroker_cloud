@@ -353,6 +353,12 @@ class Application
     super
   end
 
+  ##
+  # Return either the denormalized domain name or nil, since namespace is denormalized
+  def domain_namespace
+    attributes['domain_namespace'] or has_domain? ? domain.canonical_namespace : nil
+  end
+
   def capabilities
     @capabilities ||= domain.owner.capabilities.deep_dup rescue (raise OpenShift::UserException, "The application cannot be changed at this time.  Contact support.")
   end
@@ -609,12 +615,8 @@ class Application
       end
 
       # Validate that the features support scalable if necessary
-      if self.scalable && !(cart.is_plugin? || cart.is_service?)
-        if cart.is_web_framework?
-          raise OpenShift::UserException.new("Scalable app cannot be of type '#{feature_name}'.", 109)
-        else
-          raise OpenShift::UserException.new("#{feature_name} cannot be embedded in scalable app '#{name}'.", 109)
-        end
+      if self.scalable && !(cart.is_plugin? || cart.is_service? || cart.is_web_framework?)
+        raise OpenShift::UserException.new("#{feature_name} cannot be embedded in scalable app '#{name}'.", 109)
       end
 
       # prevent a proxy from being added to a non-scalable (single-gear) application
@@ -1227,10 +1229,8 @@ class Application
     # parallel
     first_proxy = web_proxy_gears.first
 
-    if options[:rollback] != true
-      options[:proxy_gears] = web_proxy_gears
-      options[:web_gears] = web_framework_gears
-    end
+    options[:proxy_gears] = web_proxy_gears
+    options[:web_gears] = web_framework_gears
 
     first_proxy.update_cluster(options.merge(sync_new_gears:true))
 
@@ -1333,7 +1333,7 @@ class Application
         tag = conn._id.to_s
 
         pub_inst.gears.each do |gear|
-          input_args = [gear.name, self.domain.namespace, gear.uuid]
+          input_args = [gear.name, self.domain_namespace, gear.uuid]
           unless gear.removed
             job = gear.get_execute_connector_job(pub_inst, conn.from_connector_name, conn.connection_type, input_args)
             RemoteJob.add_parallel_job(handle, tag, gear, job)
@@ -1371,7 +1371,7 @@ class Application
 
           Rails.logger.debug "Output of publisher - '#{pub_out}'"
           sub_inst.gears.each do |gear|
-            input_args = [gear.name, self.domain.namespace, gear.uuid, input_to_subscriber]
+            input_args = [gear.name, self.domain_namespace, gear.uuid, input_to_subscriber]
             unless gear.removed
               job = gear.get_execute_connector_job(sub_inst, conn.to_connector_name, conn.connection_type, input_args, pub_inst.cartridge_name)
               RemoteJob.add_parallel_job(handle, tag, gear, job)
@@ -1399,7 +1399,7 @@ class Application
   def deregister_routing_dns
     dns = OpenShift::DnsService.instance
     begin
-      dns.deregister_application("ha-#{self.name}", self.domain.namespace)
+      dns.deregister_application("ha-#{self.name}", self.domain_namespace)
       dns.publish
     ensure
       dns.close
@@ -1410,7 +1410,7 @@ class Application
     target_hostname = Rails.configuration.openshift[:router_hostname]
     dns = OpenShift::DnsService.instance
     begin
-      dns.register_application("ha-#{self.name}", self.domain.namespace, target_hostname)
+      dns.register_application("ha-#{self.name}", self.domain_namespace, target_hostname)
       dns.publish
     ensure
       dns.close
@@ -2758,7 +2758,7 @@ class Application
 
   def get_all_updated_ssh_keys
     ssh_keys = []
-    ssh_keys = self.app_ssh_keys.map {|k| k.to_key_hash } # the app_ssh_keys already have their name "updated"
+    ssh_keys = self.app_ssh_keys.map {|k| k.serializable_hash } # the app_ssh_keys already have their name "updated"
     ssh_keys |= get_updated_ssh_keys(nil, self.domain.system_ssh_keys)
     ssh_keys |= CloudUser.members_of(self){ |m| Ability.has_permission?(m._id, :ssh_to_gears, Application, m.role, self) }.map{ |u| get_updated_ssh_keys(u._id, u.ssh_keys) }.flatten(1)
 
@@ -2773,7 +2773,7 @@ class Application
   #
   def get_updated_ssh_keys(user_id, keys)
     updated_keys_attrs = keys.map { |key|
-      key_attrs = key.to_key_hash.deep_dup
+      key_attrs = key.serializable_hash.deep_dup
       case key.class
       when UserSshKey
         key_attrs["name"] = user_id.to_s + "-" + key_attrs["name"]

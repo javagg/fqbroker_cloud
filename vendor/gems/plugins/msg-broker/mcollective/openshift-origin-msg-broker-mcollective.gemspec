@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = "openshift-origin-msg-broker-mcollective"
-  s.version = "1.19.1"
+  s.version = "1.19.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Krishna Raman"]
-  s.date = "2013-12-18"
+  s.date = "2013-12-23"
   s.description = "OpenShift"
   s.email = ["kraman@gmail.com"]
   s.files = ["lib/openshift-origin-msg-broker-mcollective.rb", "lib/mcollective_msg_broker_engine.rb", "lib/openshift/mcollective_application_container_proxy.rb", "conf/openshift-origin-msg-broker-mcollective.conf.example", "config/initializers/openshift-origin-msg-broker-mcollective.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-msg-broker-mcollective.spec", "openshift-origin-msg-broker-mcollective.gemspec", "LICENSE", "COPYRIGHT"]

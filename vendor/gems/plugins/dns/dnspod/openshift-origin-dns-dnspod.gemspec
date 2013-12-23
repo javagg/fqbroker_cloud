@@ -6,16 +6,17 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mark Lamourine"]
-  s.date = "2013-12-18"
+  s.date = "2013-12-23"
   s.description = "Provides"
   s.email = ["markllama@gmail.com"]
-  s.files = ["lib/openshift-origin-dns-dnspod.rb", "conf/openshift-origin-dns-dnspod.conf.example", "config/initializers/openshift-origin-dns-dnspod.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-dns-dnspod.spec", "openshift-origin-dns-dnspod.gemspec", "LICENSE", "COPYRIGHT"]
+  s.files = ["lib/openshift-origin-dns-dnspod.rb", "conf/openshift-origin-dns-dnspod.conf.example", "config/initializers/openshift-origin-dns-dnspod.rb", "test/test_dnspod.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-dns-dnspod.spec", "openshift-origin-dns-dnspod.gemspec", "LICENSE", "COPYRIGHT"]
   s.homepage = "http://www.freequant.net"
   s.licenses = ["ASL"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "openshift-origin-dns-pointdns"
   s.rubygems_version = "2.0.14"
   s.summary = "Provides"
+  s.test_files = ["test/test_dnspod.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
