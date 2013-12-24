@@ -12,7 +12,7 @@ namespace :'oo-admin' do
     salt = config.get("AUTH_SALT")
     encoded_password = Digest::MD5.hexdigest(Digest::MD5.hexdigest("admin") + salt)
     mongo_cmd = "db.auth_user.update({\"_id\":\"admin\"}, {\"_id\":\"admin\",\"user\":\"admin\",\"password_hash\":\"#{encoded_password}\"}, true)"
-    cmd = %Q(mongo #{dbname} --username #{uri.user} --password #{uri.password} --eval '#{mongo_cmd}')
+    cmd = %Q(mongo #{dbname} --host #{uri.host} --port #{uri.port} --username #{uri.user} --password #{uri.password} --eval '#{mongo_cmd}')
     system(cmd)
   end
 end
