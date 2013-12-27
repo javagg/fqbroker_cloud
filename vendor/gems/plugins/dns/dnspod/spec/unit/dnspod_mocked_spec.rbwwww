@@ -1,12 +1,6 @@
-#Test each of the basic functions of the NsupdateDnsPlugin
-
 require 'rubygems'
-
-# the plugin extends classes in the OpenShift::Controller module
-# load the superclass for all DnsService classes: Openshift::DnsService
 require 'openshift/dns_service'
-
-require 'openshift/route53_plugin'
+require 'openshift/dnspod_plugin'
 
 $hosted_zone = "apps.example.com"
 $hosted_zone_id = "MYHOSTEDZONEID"

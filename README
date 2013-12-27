@@ -24,3 +24,7 @@ MONGOLAB_URI is set by default by heroku
 
 test stuff
 amqp://52M4fJ-H:0ELRTZnAChnQ9tpOcIUOADBcNN6PP2tR@sad-bartsia-13.bigwig.lshift.net:10110/0yB_Vx174S32
+
+MONGOLAB_URI=mongodb://openshift:mooo@localhost:27017/openshift_broker_dev
+ACTIVEMQ_URL=stomp://mcollective:marionett@localhost:61613
+DNSPOD_URL=https://lu.leeo5@gmail.com:hello!2345@dnsapi.cn

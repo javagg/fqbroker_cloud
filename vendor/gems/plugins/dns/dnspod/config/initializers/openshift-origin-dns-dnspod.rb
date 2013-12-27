@@ -13,6 +13,7 @@ Broker::Application.configure do
   conf = OpenShift::Config.new(conf_file)
 
   config.dns = {
+    :dnspod_url => conf.get("DNSPOD_URL", "unset"),
     :dnspod_login => conf.get("DNSPOD_LOGIN_EMAIL", "unset"),
     :dnspod_password => conf.get("DNSPOD_LOGIN_PASSWORD", "unset")
   }

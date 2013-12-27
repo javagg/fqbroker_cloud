@@ -18,7 +18,7 @@ PATH
 PATH
   remote: vendor/gems/common
   specs:
-    openshift-origin-common (1.18.3)
+    openshift-origin-common (1.18.4)
       activemodel
       json
       safe_yaml
