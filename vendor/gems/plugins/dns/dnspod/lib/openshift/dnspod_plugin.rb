@@ -24,6 +24,7 @@ module OpenShift
       end
 
       url = access_info[:dnspod_url]
+      puts url
       # Sadly, URI.parse can hanlde my account name
       # which is an email account with @ in it
       m = /(.*):\/\/(.*)/.match(url)
@@ -71,7 +72,9 @@ module OpenShift
         :domain => @domain_suffix
       }
       res = @http.post(url, params)
+      puts res
       reply = JSON.parse(res.content)
+      puts reply
       @domain_id = reply['domain']['id']
       @last_reply = reply
     end
