@@ -50,9 +50,9 @@ PATH
       openshift-origin-controller
 
 PATH
-  remote: vendor/gems/plugins/dns/dnspod
+  remote: vendor/gems/plugins/dns/dnsla
   specs:
-    openshift-origin-dns-dnspod (0.0.1)
+    openshift-origin-dns-dnsla (0.0.1)
       openshift-origin-controller
 
 PATH
@@ -258,7 +258,7 @@ DEPENDENCIES
   openshift-origin-auth-mongo!
   openshift-origin-common!
   openshift-origin-controller!
-  openshift-origin-dns-dnspod!
+  openshift-origin-dns-dnsla!
   openshift-origin-msg-broker-mcollective!
   parseconfig (~> 1.0.2)
   psych

@@ -20,6 +20,11 @@ File.open(File.expand_path(File.join(File.dirname(__FILE__), '..', 'etc', 'opens
   f.puts ERB.new(IO.read(template)).result
 end
 
+File.open(File.expand_path(File.join(File.dirname(__FILE__), '..', 'etc', 'openshift', 'plugins.d', 'openshift-origin-dns-dnsla.conf')), "w") do |f|
+  template = File.expand_path(File.join(File.dirname(__FILE__), '..', 'conf', 'openshift', 'plugins.d', 'openshift-origin-dns-dnsla.conf.erb'))
+  f.puts ERB.new(IO.read(template)).result
+end
+
 # Set up gems listed in the Gemfile.
 gem_file = ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 

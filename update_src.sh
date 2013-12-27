@@ -45,7 +45,7 @@ popd
 
 # Our additional plugins
 if [ ! -z "$FQ_SERVER_SRC" ]; then
-  for dir in plugins/account/mongo plugins/dns/dnspod
+  for dir in plugins/account/mongo plugins/dns/dnspod plugins/account/mongo plugins/dns/dnsla
   do
     base_dir=$(dirname $dir)
     mkdir -p vendor/gems/$base_dir

@@ -33,20 +33,16 @@ gem 'openshift-origin-common', path: 'vendor/gems/common'
 gem 'openshift-origin-controller', path: 'vendor/gems/controller'
 gem 'openshift-origin-msg-broker-mcollective', path: 'vendor/gems/plugins/msg-broker'
 gem 'openshift-origin-admin-console', path: 'vendor/gems/admin-console'
-
-#gem 'openshift-origin-dns-nsupdate', path: 'vendor/gems/plugins/dns/nsupdate'
-gem 'openshift-origin-dns-dnspod', path: 'vendor/gems/plugins/dns/dnspod'
-
 gem 'netrc' # rest-client has an undeclared prereq on netrc
 
 gem 'openshift-origin-auth-mongo', path: 'vendor/gems/plugins/auth/mongo'
 
 if ENV["FQ_SERVER_SRC"]
   gem 'openshift-freequant-account-mongo', path: File.join(ENV['FQ_SERVER_SRC'], 'plugins', 'account', 'mongo')
-  gem 'openshift-origin-dns-dnspod', path: File.join(ENV['FQ_SERVER_SRC'], 'plugins', 'dns', 'dnspod')
+  gem 'openshift-origin-dns-dnsla', path: File.join(ENV['FQ_SERVER_SRC'], 'plugins', 'dns', 'dnsla')
 else
   gem 'openshift-freequant-account-mongo', path: 'vendor/gems/plugins/account/mongo'
-  gem 'openshift-origin-dns-dnspod', path: 'vendor/gems/plugins/dns/dnspod'
+  gem 'openshift-origin-dns-dnsla', path: 'vendor/gems/plugins/dns/dnsla'
 end
 
 group :development, :test do

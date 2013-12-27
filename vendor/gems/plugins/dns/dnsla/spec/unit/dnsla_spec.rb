@@ -5,7 +5,7 @@ require 'parseconfig'
 # the plugin extends classes in the OpenShift::Controller module
 # load the superclass for all DnsService classes: Openshift::DnsService
 require 'openshift/dns_service'
-require 'openshift/dnspod_plugin'
+require 'openshift/dnsla_plugin'
 
 $test_accessurl = ENV['TEST_ACCESSURL']
 $test_domain = ENV['TEST_DOMAIN']
@@ -32,7 +32,7 @@ module Rails
       attr_accessor :openshift, :dns
       def initialize()
         @openshift = { :domain_suffix => $test_domain }
-        @dns = { :dnspod_url => $test_accessurl }
+        @dns = { :dnsla_url => $test_accessurl }
       end
     end
 
@@ -43,25 +43,21 @@ module Rails
 end
 
 module OpenShift
-  describe DnsPodPlugin do
-    it "can function well with DNSPod" do
-      dns_service = DnsPodPlugin.new()
+  describe DnsLaPlugin do
+    it "can function well with DNSLA" do
+      dns_service = DnsLaPlugin.new()
       reply = dns_service.last_reply
-      reply['status']['code'].should be == '1'
-      reply['domain']['name'].should be == $test_domain
+      reply['status']['code'].should be == 300
+      reply['data']['domainname'].should be == $test_domain
 
       reply = dns_service.register_application($test_appname, $test_namespace, $test_nodename1)
-      reply['status']['code'].should be == '1'
-      #reply['record']['id'].should match(/[0-9]+/)
-      reply['record']['status'].should be == 'enable'
+      reply['status']['code'].should be == 300
 
       reply = dns_service.modify_application($test_appname, $test_namespace, $test_nodename2)
-      reply['status']['code'].should be == '1'
-      #reply['record']['id'].should match(/[0-9]+/)
-      reply['record']['status'].should be == 'enable'
+      reply['status']['code'].should be == 300
 
       reply = dns_service.deregister_application($test_appname, $test_namespace)
-      reply['status']['code'].should be == '1'
+      reply['status']['code'].should be == 300
     end
   end
 end

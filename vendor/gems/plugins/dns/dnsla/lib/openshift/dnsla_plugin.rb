@@ -2,10 +2,11 @@
 
 require 'httpclient'
 require 'json'
+require 'uri'
 
 module OpenShift
-  class DnsPodPlugin < OpenShift::DnsService
-    @oo_dns_provider = OpenShift::DnsPodPlugin
+  class DnsLaPlugin < OpenShift::DnsService
+    @oo_dns_provider = OpenShift::DnsLaPlugin
 
     # DEPENDENCIES
     # Rails.application.config.openshift[:domain_suffix]
@@ -20,59 +21,29 @@ module OpenShift
         access_info = Rails.application.config.dns
         @domain_suffix = Rails.application.config.openshift[:domain_suffix]
       else
-        raise Exception.new("DNSPod DNS service is not initialized")
+        raise Exception.new("DNSLA DNS service is not initialized")
       end
-
-      url = access_info[:dnspod_url]
-      # Sadly, URI.parse can hanlde my account name
-      # which is an email account with @ in it
-      m = /(.*):\/\/(.*)/.match(url)
-      schema = m[1]
-      r = m[2]
-      if idx = r.index("/")
-        path = r[idx..-1]
-        r = r[0..idx-1]
-      else
-        path = "/"
-      end
-      m = /(.*)@/.match(r)
-      userpass = m[1]
-      hostport = m.post_match
-
-      if idx = userpass.index(":")
-        user = userpass[0..idx-1]
-        pass = userpass[idx+1..-1]
-      else
-        user = userpass
-        pass = ""
-      end
-
-      if idx = hostport.index(":")
-        host = hostport[0..idx-1]
-        port = hostport[idx+1..-1]
-      else
-        host = hostport
-        port = ""
-      end
-
-      path = path == '/' ? "" : path
-      @api_base = "#{schema}://#{hostport}#{path}"
-      @login_email = user
-      @login_password = pass
+      uri = URI.parse(access_info[:dnsla_url])
+      hostport = uri.host
+      hostport += uri.port.to_s.length > 0 ? ":#{uri.port.to_s}" : ""
+      user = uri.userinfo.split(':')[0]
+      @api_base = "#{uri.scheme}://#{hostport}#{uri.path}"
+      @apiid = uri.userinfo.split(':')[0]
+      @apipass =  uri.userinfo.split(':')[1]
 
       # Get domain id
       @http = HTTPClient.new
-      url = "#{@api_base}/Domain.Info"
+      url = "#{@api_base}/domain.ashx"
       params = {
-        :login_email => @login_email,
-        :login_password => @login_password,
-        :format => 'json',
-        :lang => 'en',
+        :apiid => @apiid,
+        :apipass => @apipass,
+        :cmd => 'get',
+        :rtype => 'json',
         :domain => @domain_suffix
       }
       res = @http.post(url, params)
       reply = JSON.parse(res.content)
-      @domain_id = reply['domain']['id']
+      @domain_id = reply['data']['domainid']
       @last_reply = reply
     end
 
@@ -89,13 +60,13 @@ module OpenShift
     #   polling the request status
     def register_application(app_name, namespace, public_hostname)
       hostname = "#{app_name}-#{namespace}"
-      url = "#{@api_base}/Record.Create"
+      url = "#{@api_base}/record.ashx"
       params = common_params.merge({
-        :domain_id => @domain_id,
-        :sub_domain => hostname,
-        :record_type => 'CNAME',
-        :record_line => '默认',
-        :value => public_hostname
+        :cmd => 'create',
+        :host => hostname,
+        :recordtype => 'CNAME',
+        :recordline => 'Def',
+        :recorddata => public_hostname
       })
       res = @http.post(url, params)
       reply = JSON.parse(res.content)
@@ -116,9 +87,9 @@ module OpenShift
       record = get_record(fqdn)
       return nil if record.nil?
 
-      record_id = record['id']
-      url = "#{@api_base}/Record.Remove"
-      params = common_params.merge({ :record_id => record_id })
+      record_id = record['recordid']
+      url = "#{@api_base}/record.ashx"
+      params = common_params.merge({ :cmd => 'remove', :recordid => record_id })
       res = @http.post(url, params)
       reply = JSON.parse(res.content)
       reply
@@ -141,14 +112,15 @@ module OpenShift
       record = get_record(fqdn)
       return nil if record.nil?
 
-      record_id = record['id']
-      url = "#{@api_base}/Record.Modify"
+      record_id = record['recordid']
+      url = "#{@api_base}/record.ashx"
       params = common_params.merge({
-        :record_id => record_id,
-        :sub_domain => hostname,
-        :record_type => 'CNAME',
-        :record_line => '默认',
-        :value => new_public_hostname
+        :cmd => 'edit',
+        :recordid => record_id,
+        :host => hostname,
+        :recordtype => 'CNAME',
+        :recordline => 'Def',
+        :recorddata => new_public_hostname
       })
       res = @http.post(url, params)
       reply = JSON.parse(res.content)
@@ -173,31 +145,28 @@ module OpenShift
     # @return [nil|Hash] Return nil or a hash containing the requested record
     def get_record(fqdn)
       hostname = fqdn[0..-(".#{@domain_suffix}".length+1)]
-      url = "#{@api_base}/Record.List"
-      params = common_params.merge({ :sub_domain => hostname })
+      url = "#{@api_base}/record.ashx"
+      params = common_params.merge({ :cmd => 'list' })
       res = @http.post(url, params)
       reply = JSON.parse(res.content)
-
       return nil unless reply
-      return nil unless reply['records']
+      return nil unless reply['datas']
 
-      record = reply['records'].first
-      return nil unless record
-
-      return record if record[:name] = hostname
-
-      nil
+      records = reply['datas']
+      records.select! { |record|
+        record['host'] == hostname
+      }
+      return records.first
     end
 
     # get common parameters for each request, used after initialization
     def common_params
-      {
-        :login_email => @login_email,
-        :login_password => @login_password,
-        :format => 'json',
-        :lang => 'en',
-        :domain_id => @domain_id
-      }
+       {
+        :apiid => @apiid,
+        :apipass => @apipass,
+        :rtype => 'json',
+        :domainid => @domain_id
+       }
     end
   end
 end
