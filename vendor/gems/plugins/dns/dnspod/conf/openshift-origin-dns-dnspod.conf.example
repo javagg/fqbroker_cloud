@@ -1,2 +1,1 @@
-DNSPOD_LOGIN_EMAIL="nobody@example.com"
-DNSPOD_LOGIN_PASSWORD="password"
+DNSPOD_URL="https://email:password@dnsapi.cn"
