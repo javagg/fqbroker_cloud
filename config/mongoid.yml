@@ -1,7 +1,7 @@
 defaults: &defaults
   sessions:
     default:
-      uri: <%= ENV['MONGOLAB_URI'] %>
+      uri: <%= ENV['MONGODB_URL'] %>
       options:
         consistency: :strong
         safe: true
