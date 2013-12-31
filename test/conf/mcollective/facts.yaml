@@ -1,0 +1,11 @@
+---
+  architecture: x86_64
+  kernel: Linux
+  augeasversion: "1.1.0"
+  domain: example.com
+  fqdn: consol.example.com
+  hardwareisa: x86_64
+  hardwaremodel: x86_64
+  hostname: consol
+  id: root
+  ipaddress: "192.168.0.1"

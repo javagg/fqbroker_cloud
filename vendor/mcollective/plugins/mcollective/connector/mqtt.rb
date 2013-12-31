@@ -1,82 +1,66 @@
-require 'bunny'
-require 'monitor'
+require 'mqtt'
 
 module MCollective
   module Connector
-    class Amqp < Base
+    class Mqtt < Base
       attr_reader :connection
-
       def initialize
         @config = Config.instance
         @subscriptions = []
         @base64 = false
-
-        @buf = []
-        @buf.extend(MonitorMixin)
-        @empty_cond = @buf.new_cond
-
-        @channel = nil
       end
 
       def connect
-        Log.debug("Connection attempt to amqp server")
+        Log.debug("Connection attempt to MQTT server")
         if @connection
-          Log.debug("Already connected. Not re-initializing connection")
+          Log.debug("Already connection, not re-initializing connection")
           return
         end
-
+        options = {}
         # Parse out the config info
-        host = get_option("amqp.host", "127.0.0.1")
-        port = get_option("amqp.port", 5672).to_i
-        user = get_option("amqp.user")
-        password = get_option("amqp.password")
-        vhost = get_option("amqp.vhost")
-        url = "amqp://"
-        url += "#{user}:#{password}@" unless user.nil? or password.nil?
-        url += "#{host}:#{port}"
-        url += "#{vhost}" unless vhost.nil?
-        ampq_options = {}
+        options['remote_host'] = get_option("mqtt.remote_host", "localhost")
+        options['remote_port'] = get_option("mqtt.remote_port", 1883).to_i
+        options['username'] = get_option("mqtt.username")
+        options['password'] = get_option("mqtt.password")
 
         @connection = nil
         begin
-          Log.debug("Connecting to #{url}, #{ampq_options}")
-          @connection = Bunny.new(url, ampq_options)
-          @connection.start
-        rescue Bunny::Exception => e
-          Log.error("Initial connection failed... retrying")
-          sleep 1
-          retry
+          Log.debug("Connecting with #{options}")
+          @connection = ::MQTT::Client.new(options)
+          @connection.connect
+        rescue MQTT::Exception => e
+          raise("Could not connect to MQTT Server: #{e}")
         end
-        @channel = @connection.create_channel
-        Log.info("AMQP Connection established")
+        Log.info("MQTT Connection established")
+      end
+
+      def disconnect
+        Log.debug("Disconnecting from MQTT Server")
+        @connection.disconnect
+        @connection = nil
       end
 
       def receive
+        Log.debug("Waiting for a message from MQTT")
         begin
-          Log.debug("Waiting for a message...")
-          msg = nil
-          @buf.synchronize do
-            @empty_cond.wait_while { @buf.empty? }
-            msg = @buf.shift
-          end
-          Log.debug("Received message #{msg.inspect}")
-        rescue Bunny::Exception => e
-          Log.debug("Caught Exception #{e}")
+          msg = @connection.get
+        rescue ::MQTT::Exception
+          sleep 1
           retry
         end
-        Message.new(msg[:payload], msg, :base64 => @base64)
+        Log.debug("Received message #{msg.inspect}")
+        Message.new(msg[1], msg, :base64 => @base64)
       end
 
       def publish(msg)
         Log.debug("Publish #{msg.inspect}")
         msg.base64_encode! if @base64
 
-        raise "Cannot set specific reply to targets with the AMQP plugin" if msg.reply_to
+        raise "Cannot set specific reply to targets with the MQTT plugin" if msg.reply_to
 
         target = make_target(msg.agent, msg.type, msg.collective)
-        Log.debug("Sending a broadcast message to AMQP target '#{target}'")
-        q = @channel.queue(target)
-        q.publish msg.payload
+        Log.debug("Sending a broadcast message to MQTT target '#{target}'")
+        @connection.publish(target, msg.payload)
       end
 
       # Subscribe to a topic or queue
@@ -84,29 +68,18 @@ module MCollective
         source = make_target(agent, type, collective)
         unless @subscriptions.include?(source)
           Log.debug("Subscribing to #{source}")
-          queue = @channel.queue(source)
-          queue.subscribe(:block => false) do |delivery_info, properties, payload|
-            msg = { :delivery_info => delivery_info, :properties => properties, :payload => payload }
-            @buf.synchronize do
-              @buf.push(msg)
-              @empty_cond.signal
-            end
-          end
+          @connection.subscribe(source)
           @subscriptions << source
         end
+      rescue
+        Log.error("Received subscription request for #{source.inspect.chomp} but already had a matching subscription, ignoring")
       end
 
       def unsubscribe(agent, type, collective)
         source = make_target(agent, type, collective)
-        Log.debug("Unsubscribing #{source}")
-        @channel.queue(source).delete
+        @connection.subscribe(source)
         @subscriptions.delete(source)
-      end
-
-      def disconnect
-        Log.debug("Disconnecting from Amqp Server")
-        @connection.close
-        @connection = nil
+        Log.debug("Unsubscribing #{source}")
       end
 
       def make_target(agent, type, collective)
@@ -145,7 +118,6 @@ module MCollective
         return default unless @config.pluginconf.include?(opt)
 
         val = @config.pluginconf[opt]
-
         if val =~ /^1|yes|true/
           return true
         elsif val =~ /^0|no|false/

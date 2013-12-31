@@ -12,23 +12,24 @@ plugin.psk = unset
 
 <%
 require 'uri'
-if activemq_url = ENV["ACTIVEMQ_URL"]
-  activemq_uri = URI.parse(activemq_url)
+uri = URI.parse ENV["MQ_URL"]
+scheme = uri.scheme
+if scheme == "activemq"
 %>
 connector = activemq
 plugin.activemq.pool.size = 1
-plugin.activemq.pool.1.host = <%= activemq_uri.host %>
-plugin.activemq.pool.1.port = <%= activemq_uri.port %>
-plugin.activemq.pool.1.user = <%= activemq_uri.user %>
-plugin.activemq.pool.1.password = <%= activemq_uri.password %>
-<%
-elsif amqp_url = ENV['AMQP_URL'] || ENV['RABBITMQ_BIGWIG_URL']
-   amqp_uri = URI.parse(amqp_url)
-%>
+plugin.activemq.pool.1.host = <%= uri.host %>
+plugin.activemq.pool.1.port = <%= uri.port %>
+plugin.activemq.pool.1.user = <%= uri.user %>
+plugin.activemq.pool.1.password = <%= uri.password %>
+<% elsif scheme == "rabbitmq" or scheme == "amqp" %>
 connector = amqp
-plugin.amqp.host = <%= amqp_uri.host %>
-plugin.amqp.port = <%= amqp_uri.port %>
-plugin.amqp.user = <%= amqp_uri.user %>
-plugin.amqp.password = <%= amqp_uri.password %>
-plugin.amqp.vhost = <%= amqp_uri.path %>
+plugin.amqp.host = <%= uri.host %>
+plugin.amqp.port = <%= uri.port %>
+plugin.amqp.user = <%= uri.user %>
+plugin.amqp.password = <%= uri.password %>
+plugin.amqp.vhost = <%= uri.path %>
+<% elsif scheme == "mqtt" %>
+<% elsif scheme == "ironmq" %>
+<% else %>
 <% end %>

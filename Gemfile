@@ -28,6 +28,8 @@ end
 gem 'mongo'
 gem 'mcollective-client', '2.2.3'
 gem 'bunny'
+gem 'mqtt'
+gem 'iron_mq'
 
 gem 'openshift-origin-common', path: 'vendor/gems/common'
 gem 'openshift-origin-controller', path: 'vendor/gems/controller'

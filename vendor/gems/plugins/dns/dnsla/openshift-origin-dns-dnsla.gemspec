@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alex Lee"]
-  s.date = "2013-12-27"
+  s.date = "2013-12-30"
   s.description = "Provides"
   s.email = ["lu.lee05@gmail.com"]
   s.files = ["lib/openshift-origin-dns-dnsla.rb", "lib/openshift/dnsla_plugin.rb", "conf/openshift-origin-dns-dnsla.conf.example", "config/initializers/openshift-origin-dns-dnsla.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-dns-dnsla.spec", "openshift-origin-dns-dnsla.gemspec", "LICENSE", "COPYRIGHT"]

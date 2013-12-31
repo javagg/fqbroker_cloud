@@ -23,6 +23,7 @@ module OpenShift
       else
         raise Exception.new("DNSLA DNS service is not initialized")
       end
+
       uri = URI.parse(access_info[:dnsla_url])
       hostport = uri.host
       hostport += uri.port.to_s.length > 0 ? ":#{uri.port.to_s}" : ""

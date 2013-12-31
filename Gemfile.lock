@@ -140,6 +140,10 @@ GEM
     hike (1.2.1)
     httpclient (2.3.2)
     i18n (0.6.1)
+    iron_core (1.0.2)
+      rest (>= 2.6.4)
+    iron_mq (4.0.5)
+      iron_core (>= 0.5.1)
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -167,6 +171,7 @@ GEM
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     moped (1.5.0)
+    mqtt (0.1.0)
     multi_json (1.7.1)
     net-http-persistent (2.9)
     netrc (0.7.7)
@@ -201,6 +206,9 @@ GEM
     rdoc (4.0.1)
       json (~> 1.4)
     regin (0.3.8)
+    rest (2.6.5)
+      net-http-persistent
+      rest-client (>= 0.3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
       netrc
@@ -244,6 +252,7 @@ DEPENDENCIES
   bson_ext
   bunny
   cucumber
+  iron_mq
   json
   json_pure
   mcollective-client (= 2.2.3)
@@ -251,6 +260,7 @@ DEPENDENCIES
   mocha (~> 0.13.1)
   mongo
   mongoid
+  mqtt
   netrc
   open4
   openshift-freequant-account-mongo!
