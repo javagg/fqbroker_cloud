@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mark Lamourine"]
-  s.date = "2013-12-30"
+  s.date = "2013-12-31"
   s.description = "Provides"
   s.email = ["markllama@gmail.com"]
   s.files = ["lib/openshift-origin-dns-dnspod.rb", "lib/openshift/dnspod_plugin.rb", "conf/openshift-origin-dns-dnspod.conf.example", "config/initializers/openshift-origin-dns-dnspod.rb", "test/test_dnspod.rb", "README.md", "Rakefile", "Gemfile", "rubygem-openshift-origin-dns-dnspod.spec", "openshift-origin-dns-dnspod.gemspec", "LICENSE", "COPYRIGHT"]

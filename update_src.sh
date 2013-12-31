@@ -16,7 +16,7 @@ rm -rf vendor/mcollective/freequant
 mkdir -p vendor/mcollective/freequant/msg-common/mcollective/agent
 cp -rf $FQ_SERVER_SRC/msg-common/agent/openshift.ddl vendor/mcollective/freequant/msg-common/mcollective/agent
 mkdir -p vendor/mcollective/plugins/mcollective/connector
-cp -rf $FQ_SERVER_SRC/deps/mcollective/connector/*.rb vendor/mcollective/plugins/mcollective/connector
+cp -rf $FQ_SERVER_SRC/deps/mcollective/connector/{amqp/amqp,mqtt/mqtt}.rb vendor/mcollective/plugins/mcollective/connector
 
 # for connector testing
 cp -rf $FQ_SERVER_SRC/deps/mcollective/test/testagent.* vendor/mcollective/plugins/mcollective/agent
