@@ -1,21 +1,21 @@
+<%
+require 'uri'
+uri = URI.parse ENV["MQ_URL"]
+scheme = uri.scheme
+%>
 topicprefix = /topic/
 main_collective = mcollective
 collectives = mcollective
 libdir = vendor/mcollective/plugins:vendor/mcollective/origin/msg-common:vendor/mcollective/freequant/msg-common
 logfile = log/mcollective-client.log
 loglevel = debug
-direct_addressing = 1
+direct_addressing = <% if scheme == "activemq" %> 1 <% else %> 0 <% end %>
 
 # Plugins
 securityprovider = psk
 plugin.psk = unset
 
-<%
-require 'uri'
-uri = URI.parse ENV["MQ_URL"]
-scheme = uri.scheme
-if scheme == "activemq"
-%>
+<% if scheme == "activemq" %>
 connector = activemq
 plugin.activemq.pool.size = 1
 plugin.activemq.pool.1.host = <%= uri.host %>
@@ -30,6 +30,9 @@ plugin.amqp.user = <%= uri.user %>
 plugin.amqp.password = <%= uri.password %>
 plugin.amqp.vhost = <%= uri.path %>
 <% elsif scheme == "mqtt" %>
-<% elsif scheme == "ironmq" %>
-<% else %>
+connector = mqtt
+plugin.mqtt.remote_host = <%= uri.host %>
+plugin.mqtt.remote_port = <%= uri.port %>
+plugin.mqtt.username = <%= uri.user %>
+plugin.mqtt.password = <%= uri.password %>
 <% end %>
